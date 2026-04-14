@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Prize Awaits 🏆</title>
+  <style>
+    /* =============================================
+       GLOBAL — matches index.html dark theme
+       ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg2:       #161b22;
+      --text:      #e6edf3;
+      --muted:     #8b949e;
+      --border:    #30363d;
+      --btn-yes:   #238636;
+      --btn-yes-h: #2ea043;
+      --btn-no:    #21262d;
+      --btn-no-h:  #30363d;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    /* =============================================
+       CARD
+       ============================================= */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    /* =============================================
+       CHAIR IMAGE SECTION
+       ============================================= */
+    .chair-wrap {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px dashed var(--border);
+      background: #0d1117;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* ----------- REPLACE THIS with your chair image -----------
+       To swap the emoji for a real photo, replace the entire
+       .chair-wrap block in the HTML below with:
+
+         <img src="your-chair-photo.jpg" alt="The Chair"
+              style="width:100%;border-radius:12px;" />
+
+       Or just set the <img> src below and delete the emoji.
+       ---------------------------------------------------------- */
+    .chair-emoji {
+      font-size: 8rem;
+      line-height: 1;
+      /* ← swap this emoji or swap the whole element for an <img> */
+    }
+
+    .chair-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* =============================================
+       TEXT
+       ============================================= */
+    .prize-title {
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1.2;
+      /* ← change prize page headline here */
+    }
+
+    .prize-body {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 400px;
+      /* ← change the message text here */
+    }
+
+    .prize-body strong {
+      color: var(--text);
+    }
+
+    .signature {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: -0.5rem;
+    }
+
+    /* =============================================
+       BUTTONS
+       ============================================= */
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    /* "Yes" button */
+    .btn-yes {
+      background: var(--btn-yes);
+      color: #fff;
+      box-shadow: 0 0 18px rgba(35,134,54,0.4);
+      flex: 1;
+      justify-content: center;
+    }
+    .btn-yes:hover {
+      background: var(--btn-yes-h);
+      box-shadow: 0 0 26px rgba(35,134,54,0.6);
+    }
+
+    /* "No" button */
+    .btn-no {
+      background: var(--btn-no);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      flex: 1;
+      justify-content: center;
+    }
+    .btn-no:hover { background: var(--btn-no-h); color: var(--text); }
+
+    /* fine print under buttons */
+    .fine-print {
+      font-size: 0.72rem;
+      color: #484f58;
+      margin-top: -0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- ========================================================
+         CHAIR IMAGE
+         To replace the emoji with a real photo, swap the contents
+         of .chair-wrap with: <img src="your-photo.jpg" … />
+         ======================================================== -->
+    <div class="chair-wrap">
+      <!-- REPLACE THIS with your chair image -->
+      <div class="chair-emoji">🪑</div>
+      <span class="chair-label">The Prize</span>
+    </div>
+
+    <!-- ========================================================
+         HEADLINE — change prize page title here
+         ======================================================== -->
+    <div class="prize-title">There is a chair.</div>
+
+    <!-- ========================================================
+         MESSAGE — change the body text here
+         ======================================================== -->
+    <p class="prize-body">
+      Okay so… there's a chair. It's in a box. In the office.
+      And I'm out on Friday.<br /><br />
+      You're <strong>so talented</strong> and I believe in you 🙏<br />
+      Could you please build it? You'd literally be saving my life.
+    </p>
+
+    <!-- ========================================================
+         SIGNATURE — change sender name here
+         ======================================================== -->
+    <p class="signature">— Lucas</p>
+
+    <!-- ========================================================
+         BUTTONS — both lead back to the game (no escape 😈)
+         ======================================================== -->
+    <div class="btn-row">
+      <!-- "Yes" → back to game -->
+      <a class="btn btn-yes" href="index.html">I'll Do It 🫡</a>
+      <!-- "No" → also back to game (it's a prank) -->
+      <a class="btn btn-no"  href="index.html">Absolutely Not 😤</a>
+    </div>
+
+    <p class="fine-print">* both buttons lead to the same place. there is no escape.</p>
+
+  </div>
+</body>
+</html>
