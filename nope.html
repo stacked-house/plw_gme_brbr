@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oh no... 😔</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Rain */
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #8b949e;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #484f58;
+      max-width: 380px;
+      line-height: 1.7;
+    }
+
+    p em { color: #8b949e; }
+
+    /* Eeyore walking across */
+    .eeyore-stage {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .eeyore {
+      position: absolute;
+      bottom: 0;
+      left: -180px;
+      font-size: 5rem;
+      animation: walk 10s linear infinite;
+      filter: grayscale(60%) brightness(0.7);
+      transform: scaleX(-1);
+    }
+
+    @keyframes walk {
+      0%   { left: -180px; }
+      100% { left: calc(100% + 20px); }
+    }
+
+    .cloud {
+      position: fixed;
+      font-size: 2.5rem;
+      animation: drift 12s linear infinite;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .cloud:nth-child(1) { top: 8%;  animation-delay: 0s; }
+    .cloud:nth-child(2) { top: 18%; animation-delay: -4s; font-size: 1.8rem; }
+    .cloud:nth-child(3) { top: 4%;  animation-delay: -8s; font-size: 3rem; }
+
+    @keyframes drift {
+      0%   { left: -120px; }
+      100% { left: calc(100% + 60px); }
+    }
+
+    .sad-note {
+      font-size: 0.8rem;
+      color: #30363d;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="rain"></canvas>
+
+  <!-- Drifting clouds -->
+  <span class="cloud">☁️</span>
+  <span class="cloud">☁️</span>
+  <span class="cloud">☁️</span>
+
+  <div class="content">
+    <h1>Oh.</h1>
+    <p>
+      The chair sits. In its box. Alone.<br>
+      <em>Unbuilt. Forgotten.</em><br><br>
+      It's fine. Everything is fine.<br>
+      (Nothing is fine.)
+    </p>
+    <p class="sad-note">🥀 🥀 🥀 </p>
+  </div>
+
+  <!-- Eeyore walking sadly across the bottom -->
+  <div class="eeyore-stage">
+    <div class="eeyore">🫏</div>
+  </div>
+
+  <script>
+    /* gentle grey rain */
+    const canvas = document.getElementById('rain');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const drops = Array.from({ length: 120 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      len: 10 + Math.random() * 20,
+      speed: 4 + Math.random() * 4,
+      opacity: 0.1 + Math.random() * 0.2,
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drops.forEach(d => {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 1, d.y + d.len);
+        ctx.strokeStyle = `rgba(139,148,158,${d.opacity})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        d.y += d.speed;
+        if (d.y > canvas.height + d.len) {
+          d.y = -d.len;
+          d.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
